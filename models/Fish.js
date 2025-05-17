@@ -29,7 +29,7 @@ const fishSchema = new mongoose.Schema({
   optimal_water_temperature: [Number],
   optimal_pressure: [Number],
   image_url: { type: String, required: true },
-}, { collection: 'fishes' }); // Указываем имя коллекции
+}, { collection: 'fishes' }); 
 
 const Fish = mongoose.model('Fish', fishSchema);
 

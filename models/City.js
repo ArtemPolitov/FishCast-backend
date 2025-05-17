@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// Создание схемы для города
 const citySchema = new mongoose.Schema({
   name: { type: String, required: true },
   lat: { type: Number, required: true },
@@ -11,7 +10,6 @@ const citySchema = new mongoose.Schema({
   id: { type: Number, required: true },
 });
 
-// Создаем модель на основе схемы
 const City = mongoose.model("City", citySchema);
 
 export default City;
