@@ -17,15 +17,23 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 
-//CORS
 const allowedOrigins = [
   "http://localhost:3000",
   "http://192.168.50.249:3000",
+  "https://твоя-ссылка-на-фронт.vercel.app", // ⚠️ ЗАМЕНИ на свою Vercel ссылку
 ];
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -42,7 +50,5 @@ app.use("/api/locations", locationRoutes);
 app.use("/api/users", userRoutes);
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Сервер запущен:`);
-  console.log(`- Local:   http://localhost:${PORT}`);
-  console.log(`- Network: http://192.168.50.249:${PORT}`);
+  console.log(`Сервер запущен на порту ${PORT}`);
 });
