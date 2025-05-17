@@ -20,7 +20,7 @@ app.use(express.json());
 const allowedOrigins = [
   "http://localhost:3000",
   "http://192.168.50.249:3000",
-  "https://fish-cast-frontend.vercel.app/", 
+  "https://fish-cast-frontend.vercel.app", 
 ];
 app.use(
   cors({
